@@ -1,0 +1,15 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>questions</title>
+</head>
+<body>
+<h3>list</h3>
+<div>
+    <a href="/insert">insert question</a>
+    {% for question in questions %}
+        <p>{{question.question_text}}     {{question.like_num}}</p>
+    {% endfor %}
+</div>
+</body>
+</html>

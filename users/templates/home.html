@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Question and Answer</title>
+</head>
+
+<body>
+    <div class="container py-5">
+        {% load socialaccount %}
+        {% if not user.is_authenticated %}
+        <div class="d-grid gap-2">
+
+        <a href="{% provider_login_url 'google' %}?next=/" class="btn btn-primary btn-lg mb-3" role="button">Login with
+            Google</a>
+            </div>
+            {% endif %}
+        {% if user.is_authenticated %}
+        <div class="d-grid gap-2">
+            <a href="/insert" class="btn btn-primary btn-lg mb-3" role="button">Insert Question</a>
+        </div>
+
+        <div class="card-deck">
+            {% for question in questions %}
+            <div class="card mb-3">
+                <div class="card-body">
+                    <p class="card-text">{{ question.body }} - {{ question.tootal_likes }}</p>
+                    <form action="{% url 'like_question' %}" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="q_id" value="{{ question.id }}">
+                        <br>
+                        {% if user not in question.like.all %}
+                        <button type="submit" class="btn btn-primary" role="button">Like</button>
+                        {% else %}
+                        <button type="submit" class="btn btn-outline-danger" role="button">Unlike</button>
+                        {% endif %}
+                    </form>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <a href="logout" class="btn btn-danger btn-lg" role="button">Logout</a>
+        {% endif %}
+    </div>
+</body>
+
+</html>

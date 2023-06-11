@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>add Question</title>
+</head>
+
+<body>
+
+    <div class="container">
+        <form action="" method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="text" class="form-label">Enter your question</label>
+                <textarea name="text" rows="4" cols="70" class="form-control" id="text"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">OK</button>
+        </form>
+    </div>
+</body>
+
+</html>
